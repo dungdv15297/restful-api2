@@ -28,13 +28,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "staff", catalog = "employeemanager")
 public class Staff implements java.io.Serializable {
 
-	private Integer staffId;
+	private Long staffId;
 	private Depart depart;
 	private Position position;
 	private String staffName;
 	private Boolean gender;
 	private String address;
-	private Integer leaderId;
+	private Long leaderId;
 	private String phoneNumber;
 	private Date startDate;
 	private Date endDate;
@@ -56,7 +56,7 @@ public class Staff implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Staff(Depart depart, Position position, String staffName, Boolean gender, String address, Integer leaderId,
+	public Staff(Depart depart, Position position, String staffName, Boolean gender, String address, Long leaderId,
 			String phoneNumber, Date startDate, Date endDate, String email, String avatar, boolean status,
 			Account accounts, Set<LeaveRequest> leaveRequests, Set<Recruitment> recruitments,
 			Set<Report> reports) {
@@ -82,11 +82,11 @@ public class Staff implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "staff_id", unique = true, nullable = false)
-	public Integer getStaffId() {
+	public Long getStaffId() {
 		return this.staffId;
 	}
 
-	public void setStaffId(Integer staffId) {
+	public void setStaffId(Long staffId) {
 		this.staffId = staffId;
 	}
 
@@ -140,11 +140,11 @@ public class Staff implements java.io.Serializable {
 	}
 
 	@Column(name = "leader_id")
-	public Integer getLeaderId() {
+	public Long getLeaderId() {
 		return this.leaderId;
 	}
 
-	public void setLeaderId(Integer leaderId) {
+	public void setLeaderId(Long leaderId) {
 		this.leaderId = leaderId;
 	}
 

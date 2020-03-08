@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "depart", catalog = "employeemanager")
 public class Depart implements java.io.Serializable {
 
-	private Integer departId;
+	private Long departId;
 	private String departName;
 	private String description;
 	private Set<Staff> staffs = new HashSet<Staff>(0);
@@ -44,11 +44,11 @@ public class Depart implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "depart_id", unique = true, nullable = false)
-	public Integer getDepartId() {
+	public Long getDepartId() {
 		return this.departId;
 	}
 
-	public void setDepartId(Integer departId) {
+	public void setDepartId(Long departId) {
 		this.departId = departId;
 	}
 

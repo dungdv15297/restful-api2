@@ -23,11 +23,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "leave_request", catalog = "employeemanager")
 public class LeaveRequest implements java.io.Serializable {
 
-	private Integer lrId;
+	private Long lrId;
 	private Staff staff;
 	private Date lrStart;
 	private Date lrEnd;
-	private int leaderId;
+	private Long leaderId;
 	private String reason;
 	private Date createTime;
 	private int status;
@@ -35,7 +35,7 @@ public class LeaveRequest implements java.io.Serializable {
 	public LeaveRequest() {
 	}
 
-	public LeaveRequest(Staff staff, Date lrStart, Date lrEnd, int leaderId, String reason, Date createTime,
+	public LeaveRequest(Staff staff, Date lrStart, Date lrEnd, Long leaderId, String reason, Date createTime,
 			int status) {
 		this.staff = staff;
 		this.lrStart = lrStart;
@@ -50,11 +50,11 @@ public class LeaveRequest implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "lr_id", unique = true, nullable = false)
-	public Integer getLrId() {
+	public Long getLrId() {
 		return this.lrId;
 	}
 
-	public void setLrId(Integer lrId) {
+	public void setLrId(Long lrId) {
 		this.lrId = lrId;
 	}
 
@@ -90,11 +90,11 @@ public class LeaveRequest implements java.io.Serializable {
 	}
 
 	@Column(name = "leader_id", nullable = false)
-	public int getLeaderId() {
+	public Long getLeaderId() {
 		return this.leaderId;
 	}
 
-	public void setLeaderId(int leaderId) {
+	public void setLeaderId(Long leaderId) {
 		this.leaderId = leaderId;
 	}
 

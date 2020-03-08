@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "report", catalog = "employeemanager")
 public class Report implements java.io.Serializable {
 
-	private Integer reportId;
+	private Long reportId;
 	private Staff staff;
 	private boolean type;
 	private String reason;
@@ -42,11 +42,11 @@ public class Report implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "report_id", unique = true, nullable = false)
-	public Integer getReportId() {
+	public Long getReportId() {
 		return this.reportId;
 	}
 
-	public void setReportId(Integer reportId) {
+	public void setReportId(Long reportId) {
 		this.reportId = reportId;
 	}
 

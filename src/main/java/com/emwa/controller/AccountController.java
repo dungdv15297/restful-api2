@@ -1,13 +1,11 @@
 package com.emwa.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.validation.Valid;
+
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,63 +20,44 @@ import com.emwa.exception.ResourceNotFoundException;
 import com.emwa.model.Account;
 import com.emwa.model.Staff;
 import com.emwa.repository.AccountRepository;
+import com.emwa.repository.StaffRepository;
+import com.emwa.result.ServiceResult;
+import com.emwa.service.AccountService;
 
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/accounts")
 public class AccountController {
 
 	@Autowired
-	private AccountRepository accountRepository;
-
-	@GetMapping("accounts")
-	public List<Account> getAllAccounts() {
-		return accountRepository.findAll();
-	}
-
-	@GetMapping("accounts/{id}")
-	public ResponseEntity<Account> getAccountById(@PathVariable(value = "id") Long accountId)
-			throws ResourceNotFoundException {
-		
-		Account Account = accountRepository.findById(accountId)
-				.orElseThrow(() -> new ResourceNotFoundException("Nhân viên này không tồn tại: " + accountId));
-		
-		return ResponseEntity.ok().body(Account);
-	}
-
-	@PostMapping("accounts")
-	public Account createAccount(@Valid @RequestBody Account Account) {
-		return accountRepository.save(Account);
-	}
-
-	@PutMapping("accounts/{id}")
-	public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Long accountId,
-			@Valid @RequestBody Account accountDetails) throws ResourceNotFoundException {
-		Account account = accountRepository.findById(accountId)
-				.orElseThrow(() -> new ResourceNotFoundException("Nhân viên này không tồn tại: " + accountId));
-		account.setStaff(accountDetails.getStaff());
-		account.setUsername(accountDetails.getUsername());
-		account.setPassword(accountDetails.getPassword());
-		account.setCreateDate(accountDetails.getCreateDate());
-		account.setRole(accountDetails.getRole());
-		
-		final Account updatedAccount = accountRepository.save(account);
-		
-		return ResponseEntity.ok(updatedAccount);
-	}
-
-	@DeleteMapping("/accounts/{id}")
-	public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long accountId)
-			throws ResourceNotFoundException {
-		
-		Account account = accountRepository.findById(accountId)
-				.orElseThrow(() -> new ResourceNotFoundException("Nhân viên này không tồn tại: " + accountId));
-
-		accountRepository.delete(account);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		
-		return response;
-	}
+	private AccountService accountService;
+	
+	/* ---------------- GET ALL ACCOUNT ------------------------ */
+	  @GetMapping()
+	  public ResponseEntity<ServiceResult> findAllCustomer() {
+	    return new ResponseEntity<ServiceResult>(accountService.findAll(), HttpStatus.OK);
+	  }
+	  /* ---------------- GET ACCOUNT BY ID ------------------------ */
+	  @GetMapping("/{id}")
+	  public ResponseEntity<ServiceResult> findById(@PathVariable long id) {
+	    return new ResponseEntity<ServiceResult>(accountService.findById(id), HttpStatus.OK);
+	  }
+	  /* ---------------- CREATE NEW ACCOUNT ------------------------ */
+	  @PostMapping()
+	  public ResponseEntity<ServiceResult> create(@RequestBody Account account) {
+		  System.out.println(account);
+	    return new ResponseEntity<ServiceResult>(accountService.create(account), HttpStatus.OK);
+	  }
+	  
+	  /* ---------------- UPDATE ACCOUNT ------------------------ */
+	  @PutMapping()
+	  public ResponseEntity<ServiceResult> update(@RequestBody Account account) {
+	    return new ResponseEntity<ServiceResult>(accountService.update(account), HttpStatus.OK);
+	  }
+	  /* ---------------- DELETE ACCOUNT ------------------------ */
+	  @DeleteMapping()
+	  public ResponseEntity<ServiceResult> delete(@RequestBody Account account) {
+	    return new ResponseEntity<ServiceResult>(accountService.delete(account.getAccountId()), HttpStatus.OK);
+	  }
 
 }
