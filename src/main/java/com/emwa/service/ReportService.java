@@ -1,8 +1,10 @@
 package com.emwa.service;
 
+import org.springframework.stereotype.Service;
+
 import com.emwa.model.Report;
 import com.emwa.result.ServiceResult;
-
+@Service
 public interface ReportService {
 	public ServiceResult findAll();
 	public ServiceResult findById(long id);

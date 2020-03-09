@@ -9,7 +9,6 @@ import com.emwa.repository.AccountRepository;
 import com.emwa.result.ServiceResult;
 import com.emwa.result.ServiceResult.Status;
 import com.emwa.service.AccountService;
-
 @Service
 public class AccountServiceImpl implements AccountService{
 

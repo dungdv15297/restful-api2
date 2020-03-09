@@ -1,15 +1,14 @@
 package com.emwa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.emwa.model.Account;
 import com.emwa.model.Depart;
-import com.emwa.repository.AccountRepository;
 import com.emwa.repository.DepartRepository;
 import com.emwa.result.ServiceResult;
 import com.emwa.result.ServiceResult.Status;
 import com.emwa.service.DepartService;
-
+@Service
 public class DepartServiceImpl implements DepartService{
 	@Autowired
 	DepartRepository departRepository;

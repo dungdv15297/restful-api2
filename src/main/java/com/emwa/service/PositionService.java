@@ -1,8 +1,10 @@
 package com.emwa.service;
 
+import org.springframework.stereotype.Service;
+
 import com.emwa.model.Position;
 import com.emwa.result.ServiceResult;
-
+@Service
 public interface PositionService {
 	public ServiceResult findAll();
 	public ServiceResult findById(long id);
