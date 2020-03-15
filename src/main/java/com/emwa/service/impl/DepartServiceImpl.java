@@ -25,13 +25,24 @@ public class DepartServiceImpl implements DepartService{
 		ServiceResult result = new ServiceResult();
 	    Depart depart = departRepository.findById(id).orElse(null);
 	    result.setData(depart);
+	    if(depart!=null) {
+	    	result.setMessage("Depart "+depart.getDepartId()+" has been founded!");
+	    }else {
+	    	result.setMessage("Can not find any depart!");
+	    }
 	    return result;
 	}
 
 	@Override
 	public ServiceResult create(Depart depart) {
 		ServiceResult result = new ServiceResult();
-		result.setData(departRepository.save(depart));
+		Depart dp = departRepository.save(depart);
+		result.setData(dp);
+		if(dp!=null) {
+			result.setMessage("Depart "+dp.getDepartId()+" has been created!");
+		}else {
+			result.setMessage("Can not create any new depart!");
+		}
 		return result;
 	}
 
@@ -42,7 +53,9 @@ public class DepartServiceImpl implements DepartService{
 			result.setStatus(Status.FAILED);
 			result.setMessage("Depart Not Found");
 		} else {
-			result.setData(departRepository.save(depart));
+			Depart dp = departRepository.save(depart);
+			result.setData(dp);
+			result.setMessage("Depart "+dp.getDepartId()+" has been updated!");
 		}
 		return result;
 	}
@@ -56,7 +69,7 @@ public class DepartServiceImpl implements DepartService{
 			result.setMessage("Depart Not Found");
 		} else {
 			departRepository.delete(depart);
-			result.setMessage("Delete Success");
+			result.setMessage("Depart "+depart.getDepartId()+" has been deleted!");
 		}
 		return result;
 	}

@@ -27,13 +27,24 @@ public class AccountServiceImpl implements AccountService{
 		ServiceResult result = new ServiceResult();
 	    Account account = accountRepository.findById(id).orElse(null);
 	    result.setData(account);
+	    if(account!=null) {
+	    	result.setMessage("Account "+account.getAccountId()+" has been founded!");
+	    }else {
+	    	result.setMessage("Can not find any account!");
+	    }
 	    return result;
 	}
 
 	@Override
 	public ServiceResult create(Account account) {
 		ServiceResult result = new ServiceResult();
-		result.setData(accountRepository.save(account));
+		Account acc = accountRepository.save(account);
+		result.setData(acc);
+		if(acc != null) {
+			result.setMessage("Account "+acc.getAccountId()+" has been created!");
+		}else {
+			result.setMessage("Can not create any new account!");
+		}
 		return result;
 	}
 
@@ -44,7 +55,9 @@ public class AccountServiceImpl implements AccountService{
 			result.setStatus(Status.FAILED);
 			result.setMessage("Account Not Found");
 		} else {
-			result.setData(accountRepository.save(account));
+			Account acc = accountRepository.save(account);
+			result.setData(acc);
+			result.setMessage("Account "+acc.getAccountId()+" has been updated!");
 		}
 		return result;
 	}
@@ -58,7 +71,7 @@ public class AccountServiceImpl implements AccountService{
 			result.setMessage("Account Not Found");
 		} else {
 			accountRepository.delete(account);
-			result.setMessage("Delete Success");
+			result.setMessage("Account "+account.getAccountId()+" has been deleted!");
 		}
 		return result;
 	}

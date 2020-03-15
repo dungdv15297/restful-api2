@@ -24,13 +24,24 @@ public class StaffServiceImpl implements StaffService {
 		ServiceResult result = new ServiceResult();
 	    Staff staff = staffRepository.findById(id).orElse(null);
 	    result.setData(staff);
+	    if(staff!=null) {
+	    	result.setMessage("Staff "+staff.getStaffId()+" has been founded!");
+	    }else {
+	    	result.setMessage("Can not find any staff!");
+	    }
 	    return result;
 	}
 
 	@Override
 	public ServiceResult create(Staff staff) {
 		ServiceResult result = new ServiceResult();
-		result.setData(staffRepository.save(staff));
+		Staff stf = staffRepository.save(staff);
+		result.setData(stf);
+		if(stf!=null) {
+			result.setMessage("Staff "+stf.getStaffId()+" has been created!");
+		}else {
+			result.setMessage("Can not create any new staff!");
+		}
 		return result;
 	}
 
@@ -41,7 +52,9 @@ public class StaffServiceImpl implements StaffService {
 			result.setStatus(Status.FAILED);
 			result.setMessage("Staff Not Found");
 		} else {
-			result.setData(staffRepository.save(staff));
+			Staff stf = staffRepository.save(staff);
+			result.setData(stf);
+			result.setMessage("Staff "+stf.getStaffId()+" has been updated!");
 		}
 		return result;
 	}
@@ -55,7 +68,7 @@ public class StaffServiceImpl implements StaffService {
 			result.setMessage("Staff Not Found");
 		} else {
 			staffRepository.delete(staff);
-			result.setMessage("Delete Success");
+			result.setMessage("Staff "+staff.getStaffId()+" has been deleted!");
 		}
 		return result;
 	}

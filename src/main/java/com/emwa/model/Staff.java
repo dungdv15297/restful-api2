@@ -92,7 +92,7 @@ public class Staff implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "depart_id")
-	@JsonBackReference
+	@JsonBackReference(value="anyName")
 	public Depart getDepart() {
 		return this.depart;
 	}

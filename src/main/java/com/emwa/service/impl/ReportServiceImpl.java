@@ -25,13 +25,24 @@ public class ReportServiceImpl implements ReportService {
 		ServiceResult result = new ServiceResult();
 		Report report = reportRepository.findById(id).orElse(null);
 		result.setData(report);
+		if(report!=null) {
+	    	result.setMessage("Report "+report.getReportId()+" has been founded!");
+	    }else {
+	    	result.setMessage("Can not find any report!");
+	    }
 		return result;
 	}
 
 	@Override
 	public ServiceResult create(Report report) {
 		ServiceResult result = new ServiceResult();
-		result.setData(reportRepository.save(report));
+		Report rp = reportRepository.save(report);
+		result.setData(rp);
+		if(rp!=null) {
+			result.setMessage("Depart "+rp.getReportId()+" has been created!");
+		}else {
+			result.setMessage("Can not create any new report!");
+		}
 		return result;
 	}
 
@@ -42,7 +53,9 @@ public class ReportServiceImpl implements ReportService {
 			result.setStatus(Status.FAILED);
 			result.setMessage("Account Not Found");
 		} else {
-			result.setData(reportRepository.save(report));
+			Report rp = reportRepository.save(report);
+			result.setData(rp);
+			result.setMessage("Report "+rp.getReportId()+" has been updated!");
 		}
 		return result;
 	}
@@ -56,7 +69,7 @@ public class ReportServiceImpl implements ReportService {
 			result.setMessage("Report Not Found");
 		} else {
 			reportRepository.delete(report);
-			result.setMessage("Delete Success");
+			result.setMessage("Report "+report.getReportId()+" has been deleted!");
 		}
 		return result;
 	}

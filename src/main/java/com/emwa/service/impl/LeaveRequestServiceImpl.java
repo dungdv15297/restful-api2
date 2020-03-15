@@ -24,13 +24,24 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 		ServiceResult result = new ServiceResult();
 	    LeaveRequest lr = lrRepository.findById(id).orElse(null);
 	    result.setData(lr);
+	    if(lr!=null) {
+	    	result.setMessage("Leave request "+lr.getLrId()+" has been founded!");
+	    }else {
+	    	result.setMessage("Can not find any leave request!");
+	    }
 	    return result;
 	}
 
 	@Override
 	public ServiceResult create(LeaveRequest lr) {
 		ServiceResult result = new ServiceResult();
-		result.setData(lrRepository.save(lr));
+		LeaveRequest lrq = lrRepository.save(lr);
+		result.setData(lrq);
+		if(lrq!=null) {
+			result.setMessage("Leave request "+lrq.getLrId()+" has been created!");
+		}else {
+			result.setMessage("Can not create any leave requests!");
+		}
 		return result;
 	}
 
@@ -41,7 +52,9 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			result.setStatus(Status.FAILED);
 			result.setMessage("LeaveRequest Not Found");
 		} else {
-			result.setData(lrRepository.save(lr));
+			LeaveRequest lrq = lrRepository.save(lr);
+			result.setData(lrq);
+			result.setMessage("Leave request "+lrq.getLrId()+" has been updated!");
 		}
 		return result;
 	}
@@ -55,7 +68,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			result.setMessage("Leave Request Not Found");
 		} else {
 			lrRepository.delete(lr);
-			result.setMessage("Delete Success");
+			result.setMessage("Leave request "+lr.getLrId()+" has been deleted!");
 		}
 		return result;
 	}

@@ -49,9 +49,9 @@ public class AccountController {
 	}
 
 	/* ---------------- DELETE ACCOUNT ------------------------ */
-	@DeleteMapping()
-	public ResponseEntity<ServiceResult> delete(@RequestBody Account account) {
-		return new ResponseEntity<ServiceResult>(accountService.delete(account.getAccountId()), HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ServiceResult> delete(@PathVariable Long id) {
+		return new ResponseEntity<ServiceResult>(accountService.delete(id), HttpStatus.OK);
 	}
 
 }

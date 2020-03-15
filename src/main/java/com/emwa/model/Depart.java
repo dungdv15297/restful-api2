@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -71,7 +72,7 @@ public class Depart implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "depart")
-	@JsonManagedReference
+	@JsonManagedReference(value="anyName")
 	public Set<Staff> getStaffs() {
 		return this.staffs;
 	}
