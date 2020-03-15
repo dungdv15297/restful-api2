@@ -1,13 +1,14 @@
 package com.emwa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.emwa.model.LeaveRequest;
 import com.emwa.repository.LeaveRequestRepository;
 import com.emwa.result.ServiceResult;
 import com.emwa.result.ServiceResult.Status;
 import com.emwa.service.LeaveRequestService;
-
+@Service
 public class LeaveRequestServiceImpl implements LeaveRequestService {
 	@Autowired
 	LeaveRequestRepository lrRepository;

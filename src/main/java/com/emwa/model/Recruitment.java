@@ -22,14 +22,14 @@ public class Recruitment implements java.io.Serializable {
 
 	private Long recruitmentId;
 	private Staff staff;
-	private int title;
-	private int description;
-	private int status;
+	private String title;
+	private String description;
+	private Boolean status;
 
 	public Recruitment() {
 	}
 
-	public Recruitment(Staff staff, int title, int description, int status) {
+	public Recruitment(Staff staff, String title, String description, Boolean status) {
 		this.staff = staff;
 		this.title = title;
 		this.description = description;
@@ -60,29 +60,29 @@ public class Recruitment implements java.io.Serializable {
 	}
 
 	@Column(name = "title", nullable = false)
-	public int getTitle() {
+	public String getTitle() {
 		return this.title;
 	}
 
-	public void setTitle(int title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	@Column(name = "description", nullable = false)
-	public int getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(int description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Column(name = "status", nullable = false)
-	public int getStatus() {
+	public Boolean getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 

@@ -4,6 +4,8 @@ package com.emwa.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,7 +36,6 @@ public class Staff implements java.io.Serializable {
 	private String staffName;
 	private Boolean gender;
 	private String address;
-	private Long leaderId;
 	private String phoneNumber;
 	private Date startDate;
 	private Date endDate;
@@ -56,7 +57,7 @@ public class Staff implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Staff(Depart depart, Position position, String staffName, Boolean gender, String address, Long leaderId,
+	public Staff(Depart depart, Position position, String staffName, Boolean gender, String address,
 			String phoneNumber, Date startDate, Date endDate, String email, String avatar, boolean status,
 			Account accounts, Set<LeaveRequest> leaveRequests, Set<Recruitment> recruitments,
 			Set<Report> reports) {
@@ -65,7 +66,6 @@ public class Staff implements java.io.Serializable {
 		this.staffName = staffName;
 		this.gender = gender;
 		this.address = address;
-		this.leaderId = leaderId;
 		this.phoneNumber = phoneNumber;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -139,15 +139,6 @@ public class Staff implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "leader_id")
-	public Long getLeaderId() {
-		return this.leaderId;
-	}
-
-	public void setLeaderId(Long leaderId) {
-		this.leaderId = leaderId;
-	}
-
 	@Column(name = "phone_number", length = 12)
 	public String getPhoneNumber() {
 		return this.phoneNumber;
@@ -204,7 +195,7 @@ public class Staff implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "staff")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "staff", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	public Account getAccounts() {
 		return this.accounts;

@@ -1,13 +1,14 @@
 package com.emwa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.emwa.model.Staff;
 import com.emwa.repository.StaffRepository;
 import com.emwa.result.ServiceResult;
 import com.emwa.result.ServiceResult.Status;
 import com.emwa.service.StaffService;
-
+@Service
 public class StaffServiceImpl implements StaffService {
 	@Autowired
 	StaffRepository staffRepository;

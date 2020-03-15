@@ -1,6 +1,7 @@
 package com.emwa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.emwa.model.Account;
 import com.emwa.model.Report;
@@ -8,7 +9,7 @@ import com.emwa.repository.ReportRepository;
 import com.emwa.result.ServiceResult;
 import com.emwa.result.ServiceResult.Status;
 import com.emwa.service.ReportService;
-
+@Service
 public class ReportServiceImpl implements ReportService {
 	@Autowired
 	ReportRepository reportRepository;
